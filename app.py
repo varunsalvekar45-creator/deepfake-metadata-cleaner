@@ -28,14 +28,77 @@ def home():
         else:
             result = "No sensitive data found"
 
-    return render_template_string("""
-    <h2>DeepFake Metadata Cleaner</h2>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="image">
-        <input type="submit">
-    </form>
-    <p>{{result}}</p>
-    """, result=result)
+   return render_template_string("""
+<!DOCTYPE html>
+<html>
+<head>
+<title>DeepFake Metadata Cleaner</title>
+
+<style>
+body{
+    background: linear-gradient(to right, #667eea, #764ba2);
+    font-family: Arial, sans-serif;
+    text-align:center;
+    padding-top:60px;
+}
+
+.card{
+    background:white;
+    width:400px;
+    margin:auto;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
+
+h2{
+    color:#333;
+}
+
+input[type=file]{
+    margin:15px 0;
+}
+
+button{
+    background:#667eea;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#5563c1;
+}
+
+.result{
+    margin-top:15px;
+    font-weight:bold;
+    color:#444;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>DeepFake Metadata Cleaner</h2>
+
+<form method="post" enctype="multipart/form-data">
+<input type="file" name="image" required><br>
+<button type="submit">Check Image</button>
+</form>
+
+<div class="result">
+{{result}}
+</div>
+
+</div>
+
+</body>
+</html>
+""", result=result)
 
 import os
 
