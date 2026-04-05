@@ -18,6 +18,7 @@ def get_metadata(image):
 @app.route("/", methods=["GET", "POST"])
 def home():
     result = ""
+
     if request.method == "POST":
         file = request.files["image"]
         image = Image.open(file)
@@ -28,54 +29,34 @@ def home():
         else:
             result = "No sensitive data found"
 
-   return render_template_string("""
+    return render_template_string("""
 <!DOCTYPE html>
 <html>
 <head>
 <title>DeepFake Metadata Cleaner</title>
-
 <style>
 body{
-    background: linear-gradient(to right, #667eea, #764ba2);
-    font-family: Arial, sans-serif;
-    text-align:center;
-    padding-top:60px;
+background:#f4f4f4;
+font-family:Arial;
+text-align:center;
+padding-top:50px;
 }
 
 .card{
-    background:white;
-    width:400px;
-    margin:auto;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0px 5px 15px rgba(0,0,0,0.2);
-}
-
-h2{
-    color:#333;
-}
-
-input[type=file]{
-    margin:15px 0;
+background:white;
+width:400px;
+margin:auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
 button{
-    background:#667eea;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#5563c1;
-}
-
-.result{
-    margin-top:15px;
-    font-weight:bold;
-    color:#444;
+background:#007bff;
+color:white;
+padding:10px;
+border:none;
+border-radius:5px;
 }
 </style>
 </head>
@@ -86,13 +67,11 @@ button:hover{
 <h2>DeepFake Metadata Cleaner</h2>
 
 <form method="post" enctype="multipart/form-data">
-<input type="file" name="image" required><br>
-<button type="submit">Check Image</button>
+<input type="file" name="image"><br><br>
+<button type="submit">Check</button>
 </form>
 
-<div class="result">
-{{result}}
-</div>
+<p>{{result}}</p>
 
 </div>
 
